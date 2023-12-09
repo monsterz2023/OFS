@@ -43,7 +43,7 @@ struct MpvDataCache {
     int64_t videoWidth = 0;
     int64_t videoHeight = 0;
 
-    float currentVolume = .5f;
+    float currentVolume = .0f;
 
     bool videoLoaded = false;
     std::string filePath = "";
