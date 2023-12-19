@@ -260,6 +260,7 @@ ACTION_REPEAT_STROKE,Repeat stroke,Repeat stroke
 ACTION_TOGGLE_PLAY,Play / Pause,Play / Pause
 ACTION_REDUCE_PLAYBACK_SPEED,Playback speed -10%,Playback speed -10%
 ACTION_INCREASE_PLAYBACK_SPEED,Playback speed +10%,Playback speed +10%
+ACTION_RESET_PLAYBACK_SPEED,Reset playback speed,Reset playback speed
 ACTION_GO_TO_START,Go to the start,Go to the start
 ACTION_GO_TO_END,Go to the end,Go to the end
 ACTION_RELOAD_ENABLED_EXTENSIONS,Reload enabled extensions,Reload enabled extensions

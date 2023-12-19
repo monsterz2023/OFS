@@ -364,6 +364,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(0); } },
             Tr::ACTION_ACTION_0, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_0 },
                 { ImGuiMod_None, ImGuiKey_Keypad0 },
             });
         keys->RegisterAction(
@@ -371,6 +372,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(10); } },
             Tr::ACTION_ACTION_10, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_1 },
                 { ImGuiMod_None, ImGuiKey_Keypad1 },
             });
         keys->RegisterAction(
@@ -378,6 +380,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(20); } },
             Tr::ACTION_ACTION_20, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_2 },
                 { ImGuiMod_None, ImGuiKey_Keypad2 },
             });
         keys->RegisterAction(
@@ -385,6 +388,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(30); } },
             Tr::ACTION_ACTION_30, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_3 },
                 { ImGuiMod_None, ImGuiKey_Keypad3 },
             });
         keys->RegisterAction(
@@ -392,6 +396,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(40); } },
             Tr::ACTION_ACTION_40, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_4 },
                 { ImGuiMod_None, ImGuiKey_Keypad4 },
             });
         keys->RegisterAction(
@@ -399,6 +404,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(50); } },
             Tr::ACTION_ACTION_50, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_5 },
                 { ImGuiMod_None, ImGuiKey_Keypad5 },
             });
         keys->RegisterAction(
@@ -406,6 +412,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(60); } },
             Tr::ACTION_ACTION_60, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_6 },
                 { ImGuiMod_None, ImGuiKey_Keypad6 },
             });
         keys->RegisterAction(
@@ -413,6 +420,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(70); } },
             Tr::ACTION_ACTION_70, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_7 },
                 { ImGuiMod_None, ImGuiKey_Keypad7 },
             });
         keys->RegisterAction(
@@ -420,6 +428,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(80); } },
             Tr::ACTION_ACTION_80, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_8 },
                 { ImGuiMod_None, ImGuiKey_Keypad8 },
             });
         keys->RegisterAction(
@@ -427,6 +436,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(90); } },
             Tr::ACTION_ACTION_90, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_9 },
                 { ImGuiMod_None, ImGuiKey_Keypad9 },
             });
         keys->RegisterAction(
@@ -434,6 +444,7 @@ void OpenFunscripter::registerBindings()
                 [this]() { addEditAction(100); } },
             Tr::ACTION_ACTION_100, "Actions",
             {
+                { ImGuiMod_None, ImGuiKey_Slash },
                 { ImGuiMod_None, ImGuiKey_KeypadDivide },
             });
     }
@@ -909,7 +920,8 @@ void OpenFunscripter::registerBindings()
                     }
                 },
                 false },
-            Tr::ACTION_MOVE_UP_5, "Moving");
+            Tr::ACTION_MOVE_UP_5, "Moving",
+            {{ ImGuiMod_Ctrl | ImGuiMod_Shift, ImGuiKey_UpArrow, true }});
 
         keys->RegisterAction(
             { "move_actions_down_five",
@@ -927,7 +939,8 @@ void OpenFunscripter::registerBindings()
                     }
                 },
                 false },
-            Tr::ACTION_MOVE_DOWN_5, "Moving");
+            Tr::ACTION_MOVE_DOWN_5, "Moving",
+            {{ ImGuiMod_Ctrl | ImGuiMod_Shift, ImGuiKey_DownArrow, true }});
 
         keys->RegisterAction(
             { "move_actions_left_snapped",
@@ -1081,6 +1094,7 @@ void OpenFunscripter::registerBindings()
                 false },
             Tr::ACTION_REDUCE_PLAYBACK_SPEED, "Videoplayer",
             {
+                { ImGuiKey_None, ImGuiKey_LeftBracket, true },
                 { ImGuiKey_None, ImGuiKey_KeypadSubtract },
             });
 
@@ -1090,7 +1104,16 @@ void OpenFunscripter::registerBindings()
                 false },
             Tr::ACTION_INCREASE_PLAYBACK_SPEED, "Videoplayer",
             {
+                { ImGuiKey_None, ImGuiKey_RightBracket, true },
                 { ImGuiKey_None, ImGuiKey_KeypadAdd },
+            });
+        keys->RegisterAction(
+            { "reset_speed",
+                [this]() { player->SetSpeed(1.f); },
+                false },
+            Tr::ACTION_RESET_PLAYBACK_SPEED, "Videoplayer",
+            {
+                { ImGuiKey_None, ImGuiKey_Backspace}
             });
 
         keys->RegisterAction(
@@ -1210,7 +1233,7 @@ void OpenFunscripter::registerBindings()
                 },
                 false },
             Tr::ACTION_CREATE_CHAPTER, "Chapters",
-            {});
+            { {ImGuiMod_None, ImGuiKey_C} });
 
         keys->RegisterAction(
             { "create_bookmark",
@@ -1222,7 +1245,7 @@ void OpenFunscripter::registerBindings()
                 },
                 false },
             Tr::ACTION_CREATE_BOOKMARK, "Chapters",
-            {});
+            { {ImGuiMod_None, ImGuiKey_B} });
     }
 
     // Group where all dynamic actions are placed.
