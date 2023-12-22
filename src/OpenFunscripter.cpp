@@ -1108,6 +1108,19 @@ void OpenFunscripter::registerBindings()
                 { ImGuiKey_None, ImGuiKey_KeypadAdd },
             });
         keys->RegisterAction(
+            { "thirds_speed",
+                [this]() { player->SetSpeed(.3f); },
+                false },
+            Tr::ACTION_THIRDS_PLAYBACK_SPEED, "Videoplayer",
+            {});
+        keys->RegisterAction(
+            { "max_speed",
+                [this]() { player->SetSpeed(3.f); },
+                false },
+            Tr::ACTION_MAX_PLAYBACK_SPEED, "Videoplayer",
+            {});
+
+        keys->RegisterAction(
             { "reset_speed",
                 [this]() { player->SetSpeed(1.f); },
                 false },
@@ -2721,7 +2734,7 @@ void OpenFunscripter::ShowAboutWindow(bool* open) noexcept
     ImGui::Text("%s: %s", TR(GIT_COMMIT), OFS_LATEST_GIT_HASH);
 
     if (ImGui::Button(FMT("%s " ICON_GITHUB, TR(LATEST_RELEASE)), ImVec2(-1.f, 0.f))) {
-        Util::OpenUrl("https://github.com/OpenFunscripter/OFS/releases/latest");
+        Util::OpenUrl("https://github.com/guangwenz/OFS/releases/latest");
     }
     ImGui::End();
 }

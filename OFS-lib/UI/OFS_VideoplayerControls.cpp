@@ -530,7 +530,7 @@ void OFS_VideoplayerControls::DrawTimeline() noexcept
         }
     }
 
-    ImGui::Columns(5, 0, false);
+    ImGui::Columns(7, 0, false);
     {
         char timeBuf1[16];
         char timeBuf2[16];
@@ -562,6 +562,18 @@ void OFS_VideoplayerControls::DrawTimeline() noexcept
         player->AddSpeed(0.10f);
     }
     ImGui::SetColumnWidth(3, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
+    ImGui::NextColumn();
+
+    if (ImGui::Button("30%", ImVec2(0, 0))) {
+        player->SetSpeed(0.30f);
+    }
+    ImGui::SetColumnWidth(4, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
+    ImGui::NextColumn();
+
+    if (ImGui::Button("300%", ImVec2(0, 0))) {
+        player->SetSpeed(3.f);
+    }
+    ImGui::SetColumnWidth(5, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
     ImGui::NextColumn();
 
     ImGui::SetNextItemWidth(-1.f);
