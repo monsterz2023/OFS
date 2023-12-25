@@ -320,21 +320,30 @@ bool OFS_VideoplayerControls::DrawChapter(ImDrawList* drawList, const ImRect& fr
 
         if(ImGui::MenuItem(TR(REMOVE)))
         {
-            Util::YesNoCancelDialog(TR(REMOVE_CHAPTER), 
-                std::string(TR(REMOVE_CHAPTER_MSG)) + FMT("\n[%s]", chapter.name.c_str()),
-                [chapterPtr = &chapter, stateHandle = chapterStateHandle](auto result)
-                {
-                    if(result == Util::YesNoCancel::Yes)
-                    {
-                        auto& state = ChapterState::State(stateHandle);
-                        auto it = std::find_if(state.chapters.begin(), state.chapters.end(),
-                            [chapterPtr](auto& chapter) { return chapterPtr == &chapter; });
-                        if(it != state.chapters.end()) {
-                            state.chapters.erase(it);
-                            EV::Enqueue<ChapterStateChanged>();
-                        }
-                    }
-                });
+            // Util::YesNoCancelDialog(TR(REMOVE_CHAPTER), 
+            //     std::string(TR(REMOVE_CHAPTER_MSG)) + FMT("\n[%s]", chapter.name.c_str()),
+            //     [chapterPtr = &chapter, stateHandle = chapterStateHandle](auto result)
+            //     {
+            //         if(result == Util::YesNoCancel::Yes)
+            //         {
+            //             auto& state = ChapterState::State(stateHandle);
+            //             auto it = std::find_if(state.chapters.begin(), state.chapters.end(),
+            //                 [chapterPtr](auto& chapter) { return chapterPtr == &chapter; });
+            //             if(it != state.chapters.end()) {
+            //                 state.chapters.erase(it);
+            //                 EV::Enqueue<ChapterStateChanged>();
+            //             }
+            //         }
+            //     });
+
+            auto chapterPtr = &chapter;
+            auto& state = ChapterState::State(chapterStateHandle);
+            auto it = std::find_if(state.chapters.begin(), state.chapters.end(),
+                [chapterPtr](auto& chapter) { return chapterPtr == &chapter; });
+            if(it != state.chapters.end()) {
+                state.chapters.erase(it);
+                EV::Enqueue<ChapterStateChanged>();
+            }
         }
         if(chapterChange)
         {
@@ -396,21 +405,29 @@ bool OFS_VideoplayerControls::DrawBookmark(ImDrawList* drawList, const ImRect& f
         
         if(ImGui::MenuItem(TR(REMOVE)))
         {
-            Util::YesNoCancelDialog(TR(REMOVE_BOOKMARK), 
-                std::string(TR(REMOVE_BOOKMARK_MSG)) + FMT("\n[%s]", bookmark.name.c_str()),
-                [bookmarkPtr = &bookmark, stateHandle = chapterStateHandle](auto result)
-                {
-                    if(result == Util::YesNoCancel::Yes)
-                    {
-                        auto& state = ChapterState::State(stateHandle);
-                        auto it = std::find_if(state.bookmarks.begin(), state.bookmarks.end(),
-                            [bookmarkPtr](auto& bookmark) { return bookmarkPtr == &bookmark; });
-                        if(it != state.bookmarks.end()) {
-                            state.bookmarks.erase(it);
-                            EV::Enqueue<ChapterStateChanged>();
-                        }
-                    }
-                });
+            // Util::YesNoCancelDialog(TR(REMOVE_BOOKMARK), 
+            //     std::string(TR(REMOVE_BOOKMARK_MSG)) + FMT("\n[%s]", bookmark.name.c_str()),
+            //     [bookmarkPtr = &bookmark, stateHandle = chapterStateHandle](auto result)
+            //     {
+            //         if(result == Util::YesNoCancel::Yes)
+            //         {
+            //             auto& state = ChapterState::State(stateHandle);
+            //             auto it = std::find_if(state.bookmarks.begin(), state.bookmarks.end(),
+            //                 [bookmarkPtr](auto& bookmark) { return bookmarkPtr == &bookmark; });
+            //             if(it != state.bookmarks.end()) {
+            //                 state.bookmarks.erase(it);
+            //                 EV::Enqueue<ChapterStateChanged>();
+            //             }
+            //         }
+            //     });
+            auto& state = ChapterState::State(chapterStateHandle);
+            auto bookMarkPtr = &bookmark;
+            auto it = std::find_if(state.bookmarks.begin(), state.bookmarks.end(),
+                [bookMarkPtr](auto& bookmark) { return bookMarkPtr == &bookmark; });
+            if(it != state.bookmarks.end()) {
+                state.bookmarks.erase(it);
+                EV::Enqueue<ChapterStateChanged>();
+            }
         }
         if(bookmarkChange)
         {
