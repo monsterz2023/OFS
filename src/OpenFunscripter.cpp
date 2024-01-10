@@ -40,7 +40,7 @@ static constexpr const char* StatisticsWindowId = "###STATISTICS";
 static constexpr const char* ActionEditorWindowId = "###ACTION_EDITOR";
 
 static constexpr int DefaultWidth = 1920;
-static constexpr int DefaultHeight = 1080;
+static constexpr int DefaultHeight = 1399; //1080;
 
 static constexpr int AutoBackupIntervalSeconds = 60;
 
@@ -1109,7 +1109,7 @@ void OpenFunscripter::registerBindings()
             });
         keys->RegisterAction(
             { "thirds_speed",
-                [this]() { player->SetSpeed(.3f); },
+                [this]() { player->SetSpeed(.4f); },
                 false },
             Tr::ACTION_THIRDS_PLAYBACK_SPEED, "Videoplayer",
             {});

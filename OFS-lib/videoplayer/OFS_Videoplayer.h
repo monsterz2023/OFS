@@ -5,9 +5,8 @@
 
 #include "OFS_VideoplayerEvents.h"
 
-class OFS_Videoplayer
-{
-    private:
+class OFS_Videoplayer {
+private:
     // Implementation data
     void* ctx = nullptr;
     // A OpenGL 2D_TEXTURE expected to contain the current video frame.
@@ -17,20 +16,20 @@ class OFS_Videoplayer
     // Helper for Mute/Unmute
     float lastVolume = 0.f;
     VideoplayerType playerType;
-    
-    public:
+
+public:
     OFS_Videoplayer(VideoplayerType playerType) noexcept;
     ~OFS_Videoplayer() noexcept;
 
-	static constexpr float MinPlaybackSpeed = 0.05f;
-	static constexpr float MaxPlaybackSpeed = 3.0f;
+    static constexpr float MinPlaybackSpeed = 0.05f;
+    static constexpr float MaxPlaybackSpeed = 3.0f;
 
     bool Init(bool hwAccel) noexcept;
     void OpenVideo(const std::string& path) noexcept;
     void SetSpeed(float speed) noexcept;
-	void AddSpeed(float speed) noexcept;
+    void AddSpeed(float speed) noexcept;
     void SetVolume(float volume) noexcept;
-    
+
     // All seeking functions must update logicalPosition
     void SetPositionExact(float timeSeconds, bool pausesVideo = false) noexcept;
     void SetPositionPercent(float percentPos, bool pausesVideo = false) noexcept;
@@ -44,11 +43,13 @@ class OFS_Videoplayer
     void SaveFrameToImage(const std::string& directory) noexcept;
     void NotifySwap() noexcept;
 
-    inline void Mute() noexcept {
+    inline void Mute() noexcept
+    {
         lastVolume = Volume();
         SetVolume(0.f);
     }
-    inline void Unmute() noexcept {
+    inline void Unmute() noexcept
+    {
         SetVolume(lastVolume);
     }
     inline void SyncWithPlayerTime() noexcept { SetPositionExact(CurrentPlayerTime()); }
@@ -72,7 +73,7 @@ class OFS_Videoplayer
     double CurrentTime() const noexcept;
 
     // The "actual" position reported by the player
-    double CurrentPlayerPosition() const noexcept; 
+    double CurrentPlayerPosition() const noexcept;
     double CurrentPlayerTime() const noexcept { return CurrentPlayerPosition() * Duration(); }
 
     const char* VideoPath() const noexcept;
