@@ -11,7 +11,7 @@ git submodule update --init
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DOFS_SNAP_IMAGE=1 ..
-make
+make -j20
 sudo make install
 ```
 

@@ -581,8 +581,8 @@ void OFS_VideoplayerControls::DrawTimeline() noexcept
     ImGui::SetColumnWidth(3, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
     ImGui::NextColumn();
 
-    if (ImGui::Button("30%", ImVec2(0, 0))) {
-        player->SetSpeed(0.30f);
+    if (ImGui::Button("40%", ImVec2(0, 0))) {
+        player->SetSpeed(0.40f);
     }
     ImGui::SetColumnWidth(4, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
     ImGui::NextColumn();
