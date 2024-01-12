@@ -184,6 +184,11 @@ bool OFS_Videoplayer::Init(bool hwAccel) noexcept
         return false;
     }
 
+    error = mpv_set_property_string(CTX->mpv, "audio-device", "null");
+    if (error != 0) {
+        LOG_WARN("Failed to set audio device to null");
+    }
+
     error = mpv_set_property_string(CTX->mpv, "loop-file", "inf");
     if (error != 0) {
         LOG_WARN("Failed to set mpv: loop-file=inf");
