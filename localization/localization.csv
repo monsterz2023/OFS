@@ -260,7 +260,7 @@ ACTION_REPEAT_STROKE,Repeat stroke,Repeat stroke
 ACTION_TOGGLE_PLAY,Play / Pause,Play / Pause
 ACTION_REDUCE_PLAYBACK_SPEED,Playback speed -10%,Playback speed -10%
 ACTION_INCREASE_PLAYBACK_SPEED,Playback speed +10%,Playback speed +10%
-ACTION_THIRDS_PLAYBACK_SPEED,Playback speed 40%,Playback speed 40%
+ACTION_SCRIPTABLE_PLAYBACK_SPEED,Playback speed scriptable,Playback speed scriptable
 ACTION_MAX_PLAYBACK_SPEED,Playback speed 3x,Playback speed 3x
 ACTION_RESET_PLAYBACK_SPEED,Reset playback speed,Reset playback speed
 ACTION_GO_TO_START,Go to the start,Go to the start

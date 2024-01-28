@@ -1108,10 +1108,10 @@ void OpenFunscripter::registerBindings()
                 { ImGuiKey_None, ImGuiKey_KeypadAdd },
             });
         keys->RegisterAction(
-            { "thirds_speed",
-                [this]() { player->SetSpeed(.4f); },
+            { "scriptable_speed",
+                [this]() { player->SetSpeed(.6f); },
                 false },
-            Tr::ACTION_THIRDS_PLAYBACK_SPEED, "Videoplayer",
+            Tr::ACTION_SCRIPTABLE_PLAYBACK_SPEED, "Videoplayer",
             {});
         keys->RegisterAction(
             { "max_speed",

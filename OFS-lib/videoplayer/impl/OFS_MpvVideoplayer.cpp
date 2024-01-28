@@ -179,6 +179,10 @@ bool OFS_Videoplayer::Init(bool hwAccel) noexcept
     if (error != 0) {
         LOGF_WARN("Failed to set mpv: config-dir=%s", confPath.c_str());
     }
+    error = mpv_set_option_string(CTX->mpv, "stop-screensaver", "no");
+    if (error != 0) {
+        LOG_WARN("Failed to set mpv: stop-screensaver=no");
+    }
 
     if (mpv_initialize(CTX->mpv) != 0) {
         return false;
