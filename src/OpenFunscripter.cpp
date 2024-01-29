@@ -2164,7 +2164,7 @@ void OpenFunscripter::repeatLastAction() noexcept
             ActiveFunscript()->EditAction(*action, FunscriptAction(player->CurrentTime(), prev->pos));
         }
     } else {
-        auto prev = ActiveFunscript()->GetPreviousActionBehind(player->CurrentTime()-0.001f);
+        auto prev = ActiveFunscript()->GetClosestAction(player->CurrentTime());
         if (prev!=nullptr) {
             undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
             ActiveFunscript()->AddAction(FunscriptAction(player->CurrentTime(), prev->pos));
