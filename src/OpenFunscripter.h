@@ -98,6 +98,7 @@ private:
     void equalizeSelection() noexcept;
     void invertSelection() noexcept;
     void isolateAction() noexcept;
+    void repeastLastLastAction() noexcept;
     void repeatLastStroke() noexcept;
 
     void saveProject() noexcept;

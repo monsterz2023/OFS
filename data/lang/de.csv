@@ -258,6 +258,7 @@ ACTION_MOVE_TO_CURRENT_POSITION,Move to current position,Bewege zur aktuellen Po
 ACTION_EQUALIZE_ACTIONS,Equalize actions,Gleiche Aktionen an
 ACTION_INVERT_ACTIONS,Invert actions,Kehre Aktionen um
 ACTION_ISOLATE_ACTION,Isolate action,Isoliere Aktionen
+ACTION_REPEAT_LAST_LAST_ACTION,Letzte letzte Aktion wiederholen
 ACTION_REPEAT_STROKE,Repeat stroke,Wiederhole Stroke
 ACTION_TOGGLE_PLAY,Play / Pause,Abspielen / Pause
 ACTION_REDUCE_PLAYBACK_SPEED,Playback speed -10%,Abspielgeschwindigkeit -10%

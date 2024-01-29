@@ -1074,6 +1074,13 @@ void OpenFunscripter::registerBindings()
                 false },
             Tr::ACTION_REPEAT_STROKE, "Special",
             { { ImGuiMod_None, ImGuiKey_Home } });
+        keys->RegisterAction(
+            { "repeat_last_last_action",
+                [this](){
+                    repeastLastLastAction();
+                }, false },
+                Tr::ACTION_REPEAT_LAST_LAST_ACTION, "Special",
+                {{ ImGuiMod_None, ImGuiKey_F}});
     }
 
     // VIDEO CONTROL
@@ -2110,6 +2117,31 @@ void OpenFunscripter::isolateAction() noexcept
         }
         else if (next != nullptr) {
             ActiveFunscript()->RemoveAction(*next);
+        }
+    }
+}
+
+void OpenFunscripter::repeastLastLastAction() noexcept
+{
+    OFS_PROFILE(__FUNCTION__);
+    auto action = ActiveFunscript()->GetActionAtTime(player->CurrentTime(), scripting->LogicalFrameTime());
+    if (action!=nullptr) {
+        auto prev = ActiveFunscript()->GetPreviousActionBehind(action->atS - 0.001f);
+        if (prev != nullptr) {
+            auto prevPrev = ActiveFunscript()->GetPreviousActionBehind(prev->atS - 0.001f);
+            if (prevPrev != nullptr) {
+                undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
+                ActiveFunscript() -> EditAction(*action, FunscriptAction(prevPrev->atS, prevPrev->pos));
+            }
+        }
+    } else {
+        auto prev = ActiveFunscript()->GetPreviousActionBehind(player->CurrentTime()-0.001f);
+        if (prev!=nullptr) {
+            auto prevPrev = ActiveFunscript()->GetPreviousActionBehind(prev->atS - 0.001f);
+            if (prevPrev != nullptr) {
+                undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
+                ActiveFunscript() -> AddAction(FunscriptAction(player->CurrentTime(), prevPrev->pos));
+            }
         }
     }
 }
