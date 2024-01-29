@@ -1077,10 +1077,17 @@ void OpenFunscripter::registerBindings()
         keys->RegisterAction(
             { "repeat_last_last_action",
                 [this](){
-                    repeastLastLastAction();
+                    repeatLastLastAction();
                 }, false },
                 Tr::ACTION_REPEAT_LAST_LAST_ACTION, "Special",
                 {{ ImGuiMod_None, ImGuiKey_F}});
+        keys->RegisterAction(
+            { "repeat_last_action",
+                [this](){
+                    repeatLastAction();
+                }, false },
+                Tr::ACTION_REPEAT_LAST_ACTION, "Special",
+                {{ ImGuiMod_None, ImGuiKey_D}});
     }
 
     // VIDEO CONTROL
@@ -2121,7 +2128,7 @@ void OpenFunscripter::isolateAction() noexcept
     }
 }
 
-void OpenFunscripter::repeastLastLastAction() noexcept
+void OpenFunscripter::repeatLastLastAction() noexcept
 {
     OFS_PROFILE(__FUNCTION__);
     auto action = ActiveFunscript()->GetActionAtTime(player->CurrentTime(), scripting->LogicalFrameTime());
@@ -2131,7 +2138,7 @@ void OpenFunscripter::repeastLastLastAction() noexcept
             auto prevPrev = ActiveFunscript()->GetPreviousActionBehind(prev->atS - 0.001f);
             if (prevPrev != nullptr) {
                 undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
-                ActiveFunscript() -> EditAction(*action, FunscriptAction(prevPrev->atS, prevPrev->pos));
+                ActiveFunscript()->EditAction(*action, FunscriptAction(player->CurrentTime(), prevPrev->pos));
             }
         }
     } else {
@@ -2140,11 +2147,31 @@ void OpenFunscripter::repeastLastLastAction() noexcept
             auto prevPrev = ActiveFunscript()->GetPreviousActionBehind(prev->atS - 0.001f);
             if (prevPrev != nullptr) {
                 undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
-                ActiveFunscript() -> AddAction(FunscriptAction(player->CurrentTime(), prevPrev->pos));
+                ActiveFunscript()->AddAction(FunscriptAction(player->CurrentTime(), prevPrev->pos));
             }
         }
     }
 }
+
+void OpenFunscripter::repeatLastAction() noexcept
+{
+    OFS_PROFILE(__FUNCTION__);
+    auto action = ActiveFunscript()->GetActionAtTime(player->CurrentTime(), scripting->LogicalFrameTime());
+    if (action!=nullptr) {
+        auto prev = ActiveFunscript()->GetPreviousActionBehind(action->atS - 0.001f);
+        if (prev != nullptr) {
+            undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
+            ActiveFunscript()->EditAction(*action, FunscriptAction(player->CurrentTime(), prev->pos));
+        }
+    } else {
+        auto prev = ActiveFunscript()->GetPreviousActionBehind(player->CurrentTime()-0.001f);
+        if (prev!=nullptr) {
+            undoSystem->Snapshot(StateType::ADD_EDIT_ACTIONS, ActiveFunscript());
+            ActiveFunscript()->AddAction(FunscriptAction(player->CurrentTime(), prev->pos));
+        }
+    }
+}
+
 
 void OpenFunscripter::repeatLastStroke() noexcept
 {

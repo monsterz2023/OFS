@@ -256,6 +256,7 @@ ACTION_MOVE_TO_CURRENT_POSITION,Move to current position,Move to current positio
 ACTION_EQUALIZE_ACTIONS,Equalize actions,Equalize actions
 ACTION_INVERT_ACTIONS,Invert actions,Invert actions
 ACTION_ISOLATE_ACTION,Isolate action,Isolate action
+ACTION_REPEAT_LAST_ACTION,Repeat last action,Repeat last action
 ACTION_REPEAT_LAST_LAST_ACTION,Repeat last last action,Repeat last last action
 ACTION_REPEAT_STROKE,Repeat stroke,Repeat stroke
 ACTION_TOGGLE_PLAY,Play / Pause,Play / Pause
