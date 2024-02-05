@@ -547,7 +547,7 @@ void OFS_VideoplayerControls::DrawTimeline() noexcept
         }
     }
 
-    ImGui::Columns(7, 0, false);
+    ImGui::Columns(8, 0, false);
     {
         char timeBuf1[16];
         char timeBuf2[16];
@@ -582,15 +582,21 @@ void OFS_VideoplayerControls::DrawTimeline() noexcept
     ImGui::NextColumn();
 
     if (ImGui::Button("Scriptable", ImVec2(0, 0))) {
-        player->SetSpeed(0.60f);
+        player->SetSpeed(2.0f);
     }
     ImGui::SetColumnWidth(4, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
+    ImGui::NextColumn();
+
+    if (ImGui::Button("2x", ImVec2(0, 0))) {
+        player->SetSpeed(2.0f);
+    }
+    ImGui::SetColumnWidth(5, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
     ImGui::NextColumn();
 
     if (ImGui::Button("MaxSpeed", ImVec2(0, 0))) {
         player->SetSpeed(3.f);
     }
-    ImGui::SetColumnWidth(5, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
+    ImGui::SetColumnWidth(6, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
     ImGui::NextColumn();
 
     ImGui::SetNextItemWidth(-1.f);
