@@ -281,6 +281,22 @@ public:
         }
     }
 
+    inline static int FormatEffeciency(char* buf, const int bufLen, float durationSeconds, float timeSeconds) noexcept
+    {
+        OFS_PROFILE(__FUNCTION__);
+        namespace chrono = std::chrono;
+        FUN_ASSERT(bufLen >= 0, "wat");
+        if (std::isinf(timeSeconds) || std::isnan(timeSeconds))
+            timeSeconds = 0.f;
+        
+        chrono::duration<float> cs(timeSeconds);
+        chrono::duration<float, std::ratio<3600,1>> timeHours = cs;
+
+        chrono::duration<float> dcs(durationSeconds);
+        chrono::duration<float, std::ratio<60,1>> timeMinutes = dcs;
+        return stbsp_snprintf(buf, bufLen, "%02f", (timeMinutes.count() / timeHours.count()));
+    }
+
     static int OpenFileExplorer(const std::string& path);
     static int OpenUrl(const std::string& url);
 

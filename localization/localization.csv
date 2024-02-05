@@ -511,6 +511,7 @@ ENABLE_MAX_SPEED_HIGHLIGHT,Max speed highlight,Max speed highlight
 ENABLE_STALL_HIGHTLIGHT, Stall highlight, Stall highlight
 FPS_OVERRIDE,FPS override,FPS override
 TIME_SPENT,Time spent,Time spent
+EFFICIENCY,Efficiency(minutes/hour),Efficiency(minutes/hour)
 SHOW_ACTION_LINES,Show lines,Show lines
 SHOW_ACTION_POINTS,Show points,Show points
 CLEAR_RECENT_FILES,Clear recent files,Clear recent files

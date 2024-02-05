@@ -183,7 +183,8 @@ bool OFS_Preferences::ShowPreferenceWindow() noexcept
 						save = true;
 					}
 					ImGui::EndDisabled();
-
+					
+					ImGui::Separator();
 					if(ImGui::Checkbox(TR_ID("StallHighlightEnable", Tr::ENABLE_STALL_HIGHTLIGHT), &overlayState.ShowStallHighlight)) {
 						save = true;
 					}

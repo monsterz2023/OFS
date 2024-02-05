@@ -297,6 +297,9 @@ void OFS_Project::ShowProjectWindow(bool* open) noexcept
 
         Util::FormatTime(Util::FormatBuffer, sizeof(Util::FormatBuffer), projectState.activeTimer, true);
         ImGui::Text("%s: %s", TR(TIME_SPENT), Util::FormatBuffer);
+
+        Util::FormatEffeciency(Util::FormatBuffer, sizeof(Util::FormatBuffer), Metadata.duration, projectState.activeTimer);
+        ImGui::Text("%s: %s", TR(EFFICIENCY), Util::FormatBuffer);
         ImGui::Separator();
 
         ImGui::Spacing();
