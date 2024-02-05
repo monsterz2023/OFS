@@ -72,6 +72,13 @@ inline static void getActionLineColor(
         *speedColor = overlay.MaxSpeedColor;
         return;
     }
+
+    float interval = (action.atS - prevAction.atS) * 1000.f;
+    bool isMoving = (action.pos - prevAction.pos) != 0;
+    if(overlay.ShowStallHighlight && isMoving && interval >= overlay.StallIntervalMs) {
+        *speedColor = overlay.StallColor;
+        return;
+    }
     float relSpeed = Util::Clamp<float>(speed / FunscriptHeatmap::MaxSpeedPerSecond, 0.f, 1.f);
     speedGradient.getColorAt(relSpeed, &speedColor->Value.x);
     speedColor->Value.w = 1.f;

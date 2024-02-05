@@ -183,7 +183,20 @@ bool OFS_Preferences::ShowPreferenceWindow() noexcept
 						save = true;
 					}
 					ImGui::EndDisabled();
-					
+
+					if(ImGui::Checkbox(TR_ID("StallHighlightEnable", Tr::ENABLE_STALL_HIGHTLIGHT), &overlayState.ShowStallHighlight)) {
+						save = true;
+					}
+					ImGui::BeginDisabled(!overlayState.ShowStallHighlight);
+					if(ImGui::InputFloat(TR(STALL_TRESHOLD), &overlayState.StallIntervalMs)) {
+						save = true;
+					}
+					ImGui::ColorEdit3(TR_ID("StallHighlightColor", Tr::COLOR), &overlayState.StallColor.Value.x, ImGuiColorEditFlags_None);
+					if(ImGui::IsItemDeactivatedAfterEdit()) {
+						save = true;
+					}
+					ImGui::EndDisabled();
+
 					ImGui::Separator();
 					if (ImGui::InputInt(TR(FAST_FRAME_STEP), &state.fastStepAmount, 1, 1)) {
 						save = true;
