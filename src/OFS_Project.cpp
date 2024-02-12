@@ -298,9 +298,17 @@ void OFS_Project::ShowProjectWindow(bool* open) noexcept
         Util::FormatTime(Util::FormatBuffer, sizeof(Util::FormatBuffer), projectState.activeTimer, true);
         ImGui::Text("%s: %s", TR(TIME_SPENT), Util::FormatBuffer);
 
-        Util::FormatEffeciency(Util::FormatBuffer, sizeof(Util::FormatBuffer), Metadata.duration, projectState.activeTimer);
-        ImGui::Text("%s: %s", TR(EFFICIENCY), Util::FormatBuffer);
-        ImGui::Separator();
+        auto& func = ActiveScript();
+        if (func != nullptr && func->Actions().size() > 0) {
+            auto& beginAction = func->Actions().front();
+            auto& endAction = func->Actions().back();
+
+            auto durationSeconds = std::abs(endAction.atS - beginAction.atS);
+            auto remainingSeconds = std::abs(Metadata.duration - endAction.atS);
+            Util::FormatEffeciency(Util::FormatBuffer, sizeof(Util::FormatBuffer), durationSeconds, projectState.activeTimer, remainingSeconds);
+            ImGui::Text("%s: %s", TR(EFFICIENCY), Util::FormatBuffer);
+            ImGui::Separator();
+        }
 
         ImGui::Spacing();
         ImGui::TextDisabled(TR(SCRIPTS));

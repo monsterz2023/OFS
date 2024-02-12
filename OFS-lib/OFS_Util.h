@@ -281,20 +281,29 @@ public:
         }
     }
 
-    inline static int FormatEffeciency(char* buf, const int bufLen, float durationSeconds, float timeSeconds) noexcept
+    inline static int FormatEffeciency(char* buf, const int bufLen, float durationSeconds, float timeSeconds, float remainingSeconds) noexcept
     {
         OFS_PROFILE(__FUNCTION__);
         namespace chrono = std::chrono;
         FUN_ASSERT(bufLen >= 0, "wat");
         if (std::isinf(timeSeconds) || std::isnan(timeSeconds))
-            timeSeconds = 0.f;
+            return stbsp_snprintf(buf, bufLen, "0.0");
         
         chrono::duration<float> cs(timeSeconds);
         chrono::duration<float, std::ratio<3600,1>> timeHours = cs;
 
         chrono::duration<float> dcs(durationSeconds);
         chrono::duration<float, std::ratio<60,1>> timeMinutes = dcs;
-        return stbsp_snprintf(buf, bufLen, "%02f", (timeMinutes.count() / timeHours.count()));
+        auto efficiency = timeMinutes.count() / timeHours.count();
+
+        if (std::isinf(remainingSeconds) || std::isnan(remainingSeconds)) {
+            return stbsp_snprintf(buf, bufLen, "%02f(0 hours left)", efficiency);
+        } else {
+            chrono::duration<float> rdcs(remainingSeconds);
+            chrono::duration<float, std::ratio<60,1>> remainingTimeMinutes = rdcs;
+            auto remainingHours = remainingTimeMinutes.count() / efficiency;
+            return stbsp_snprintf(buf, bufLen, "%02f(%02f hours left)", efficiency, remainingHours);
+        }
     }
 
     static int OpenFileExplorer(const std::string& path);
