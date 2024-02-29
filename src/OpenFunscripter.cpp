@@ -1123,7 +1123,7 @@ void OpenFunscripter::registerBindings()
             });
         keys->RegisterAction(
             { "scriptable_speed",
-                [this]() { player->SetSpeed(2.f); },
+                [this]() { player->SetSpeed(.4f); },
                 false },
             Tr::ACTION_SCRIPTABLE_PLAYBACK_SPEED, "Videoplayer",
             {});

@@ -582,7 +582,7 @@ void OFS_VideoplayerControls::DrawTimeline() noexcept
     ImGui::NextColumn();
 
     if (ImGui::Button("Scriptable", ImVec2(0, 0))) {
-        player->SetSpeed(2.0f);
+        player->SetSpeed(.4f);
     }
     ImGui::SetColumnWidth(4, ImGui::GetItemRectSize().x + style.ItemSpacing.x);
     ImGui::NextColumn();
