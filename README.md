@@ -19,17 +19,21 @@ Known linux dependencies to just compile are `build-essential libmpv-dev libglvn
 ### How to build for Windows with MinGW
 Requirements:
 - choco [chocolatey](https://chocolatey.org/install#individual)
+- [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022), with the C++ workloads
+- Open the Developer Command Prompt for VS 2022 terminal
 
 ```
-choco install cmake mingw git
+choco install git wget
 ```
 
 ```
 cd OFS
 git submodule update --init
-mkdir build
+cmake -S . -B build
 cd build
-cmake -G "MinGW Makefiles" ..
+wget https://www.7-zip.org/a/7zr.exe
+wget -O mpv-dev.7z https://sourceforge.net/projects/mpv-player-windows/files/libmpv/mpv-dev-x86_64-v3-20220925-git-56e24d5.7z/download
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release
 ```
 
 
