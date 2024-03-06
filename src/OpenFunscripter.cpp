@@ -357,7 +357,8 @@ void OpenFunscripter::registerBindings()
                 [this]() { removeAction(); } },
             Tr::ACTION_REMOVE_ACTION, "Actions",
             { { ImGuiMod_None, ImGuiKey_Delete },
-                { ImGuiMod_None, ImGuiKey_GamepadFaceRight } });
+                { ImGuiMod_None, ImGuiKey_GamepadFaceRight },
+                { ImGuiMod_Alt, ImGuiKey_D} });
         // ADD ACTIONS
         keys->RegisterAction(
             { "action_0",
@@ -1126,13 +1127,17 @@ void OpenFunscripter::registerBindings()
                 [this]() { player->SetSpeed(.4f); },
                 false },
             Tr::ACTION_SCRIPTABLE_PLAYBACK_SPEED, "Videoplayer",
-            {});
+            {
+                { ImGuiMod_Shift, ImGuiKey_LeftBracket}
+            });
         keys->RegisterAction(
             { "max_speed",
                 [this]() { player->SetSpeed(3.f); },
                 false },
             Tr::ACTION_MAX_PLAYBACK_SPEED, "Videoplayer",
-            {});
+            {
+                { ImGuiMod_Shift, ImGuiKey_RightBracket}
+            });
 
         keys->RegisterAction(
             { "reset_speed",
