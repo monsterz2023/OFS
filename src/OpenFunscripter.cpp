@@ -439,6 +439,7 @@ void OpenFunscripter::registerBindings()
             {
                 { ImGuiMod_None, ImGuiKey_9 },
                 { ImGuiMod_None, ImGuiKey_Keypad9 },
+                { ImGuiMod_None, ImGuiKey_Period },
             });
         keys->RegisterAction(
             { "action_100",
