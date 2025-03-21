@@ -43,3 +43,6 @@ Currently using: [mpv-dev-x86_64-v3-20220925-git-56e24d5.7z (it's part of the re
 ### Platforms
 I'm providing windows binaries and a linux AppImage.
 In theory OSX should work as well but I lack the hardware to set any of that up.
+
+### Snapshot
+There is also OFS.7z which have dependecies(git submodules, 7zr, mpv-dev) bundled. use that file, unzip and follow the readme there is fine too.
